@@ -1,0 +1,520 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="universal search medicine differential diagnosis signs symptoms algorithms epidemiology genetics ontologies coding patients physicians" content="HTML, CSS, XML, JavaScript">
+  <title>Universal Search Page for Medicine Symptoms Signs and Diseases</title>
+  <meta name="author" content="Hans Hendrickx MD PhD">
+  <meta name="author" content="Winston Haaswijk MPhil PhD">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="favicon.ico" type="image/ico" sizes="32x32">
+  <script src="jquery-3.4.1.min.js" type="text/javascript"></script>
+  <script src="script.js" type="text/javascript"></script>
+</head>
+
+<body>
+  <!-- Block 1 links boven text input-->
+  <div style="position:absolute; top:12px; left:34px; width:400px; font-size:32px;">
+    <form id="form" onsubmit="return false;">
+      <input style="position:absolute; top:38px; left:1px; width:285px; font-size:28px" type="text" id="userInput" placeholder="Text Input + Submit" font-size="22px" />
+      <input style="position:absolute; top:90px; left:0px; width:249px; font-size:32px;color:white;background-color:green;align:left;" type="submit" value="Submit & Go" onclick="updateSearch();">
+    </form>
+  </div>
+  <!-- <div id ="container">
+    <div align="center">
+    <img src = "lib/Volt_EU_RGB.png""width="300px"/>
+  </div>
+-->
+
+  <!-- Block 1 rechts boven -->
+  <!-- <div style="position:absolute; top:350px; left:34px; width:400px; font-size:16px;">
+    <p><strong>Compare two ways of looking up information about symptoms and diseases. Now you view method 1, the heard way. Method 2 makes use of a text input field and over 100 different prepared links. 
+      Let us know what you think about it.
+
+      Go back to this view by refresh the circular arrow in the left upper corner.
+      <br><br>
+    <a href="https://www.refdesk.com/health.html" target="_MP">Refdesk</a><span> - </span><a data-baseurl="https://cse.google.com/cse?cx=partner-pub-6978513048441664%3A3233330018&ampie=ISO-8859-1&ampq=" target="_MP">Search</a>
+    <br>
+    <a data-baseurl="https://www.ncbi.nlm.nih.gov/search/all/?term=" target="_MP">NCBI</a><span> - </span><a data-baseurl="https://www.ncbi.nlm.nih.gov/pmc/?term=" target="_MP">PCM</a>
+    <br>
+    <a data-baseurl="https://services.hon.ch/cgi-bin/HONselect? " target="_MP">HONcode</a>
+    <br>
+    <a data-baseurl="https://www.google.com/search?q=web:https://www.rxlist.com/" target="_MP">RxList</a> - <a data-baseurl="https://www.google.com/search?q=web:https://www.drugs.com/international/" target="_MP">Drug</a> - <a data-baseurl="https://www.google.com/search?q=recommended dose AND web:https://www.drugs.com/international/"
+    target="_MP">Dose</a>
+    <br> - <a data-baseurl="https://www.google.com/search?q=side effects OR Overdose" target="_MP">Side effects | Overdose</a>
+        <a href="http://www.dermnet.com" target="_MP">Skin diseases</a>
+    <br>
+    <a data-baseurl="https://www.ncbi.nlm.nih.gov/search/all/?term=" target="_MP">NCBI</a><span> - </span><a data-baseurl="https://www.ncbi.nlm.nih.gov/pmc/?term=" target="_MP">PCM</a>
+    <br>
+    <a data-baseurl="https://www.hon.ch/HONcode/Search/search.html?cref=%2F%2Fwww.hon.ch%2FCSE%2FHONCODE%2Fcontextlink.xml&ampq=" target="_MP"><strong>HONcode for Patient</strong></a>
+    <a data-baseurl="https://www.google.com/search?q=web:https://www.emedicinehealth.com/" target="_MP"><strong>EMH for patients</strong></a>
+    <br>
+    <a data-baseurl="https://www.google.com/search?q=web:https://www.rxlist.com/" target="_MP">RxList</a> - <a data-baseurl="https://www.google.com/search?q=web:https://www.drugs.com/international/" target="_MP">Drug</a> - <a data-baseurl="https://www.google.com/search?q=recommended dose AND web:https://www.drugs.com/international/"
+    target="_MP">Dose</a>
+    <br> - <a data-baseurl="https://www.google.com/search?q=side effects OR Overdose" target="_MP">Side effects | Overdose</a>
+<br>
+        Lists
+    <br>
+    <a href="https://www.uwmedicine.org/education/Pages/specialties-subspecialties.aspx" target="_MP">Medical Specialties</a>
+    <br>
+    <a href="https://www.orpha.net/consor/cgi-bin/Disease_Search_List.php?lng=EN" target="_MP">Orphan Diseases</a>
+    <br>
+    <a href="https://en.wikipedia.org/wiki/Lists_of_diseases" target="_MP">Diseases</a>
+    <a href="https://en.wikipedia.org/wiki/Category:Syndromes" target="_MP">Syndromes</a>
+    <br>
+    <a data-baseurl="https://grandrounds.com/massachusettsgeneralhospital/#gr-ready" target="_MP">MG Second opinion</a>
+    <br>
+    <a data-baseurl="https://www.hopkinsmedicine.org/search?form_instance=main&ampq=forms+medical+history&ampbtnG=Search" target="_MP">J Hopkins forms 800+</a>
+    </p>
+  </div>
+-->
+
+  <!-- Block 1 rechts beneden -->
+  <div style="position:absolute; top:830px; left:625px; width:400px; font-size:16px;">
+  </div>
+  <!-- Block 1 links beneden -->
+  <div style="position:absolute; top:830px; left:35px; width:300px; font-size:16px;">
+  </div>
+
+
+  <!-- Deel waar pagina niet mee opent. het is pas te zien als de inout is gegeven en is gesubmitted. end met /myDiv-->
+  <div id="myDIV" style="display: none" z-index="1">
+    <!-- Open page: Only input and submit button. On click: 1. show the matrix and 2. add the input to the urls, source:https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show -->
+
+    <!-- BEGINNING Left column -->
+    <div class="hexagongl" style="top:171px; left:38px;">
+      <table border="1" cellpadding="5" style="height: 100%; top:-35px; left:15px">
+        <tbody>
+          <tr>
+            <td colspan="2" align="center">
+              <a data-baseurl="https://www.google.com/search?q=EU Commission" target="_MP">EU Commission</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU Parliament" target="_MP">Parliament</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=EU subsidies" target="_MP">Subsidies</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU programs" target="_MP">Programs</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU programs for Business" target="_MP">Business</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=EU literature" target="_MP">Literature</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU studies" target="_MP">Studies</a>
+              <a data-baseurl="https://www.google.com/search?q=EU Procedures" target="_MP">Procedures</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=EU policies" target="_MP">Policies</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU initiatives" target="_MP">Initiatives</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=EU costs of regulations" target="_MP">Costs</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU statistics" target="_MP">Statistics</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU news in media" target="_MP">News</a> |
+              <a data-baseurl="https://scholar.google.com/scholar?hl=en&as_sdt=0%2C5&q=EU" target="_MP">Google Scholar</a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <div class="c">
+                <font size="+2">
+             <strong>
+          <a data-baseurl="https://www.google.com/search?q=what the EU does for me? " target="_MP">What EU<br>
+            does for me</a>
+          </strong>
+         </font></div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <a data-baseurl="https://www.google.com/search?q=Europe +minorities" target="_MP">All Minorities</a> |
+              <a href="https://www.google.com/search?q=Europe list of minorities" target="_MP">List</a>
+              <br>
+              <a href="https://www.google.com/search?q=what the EU does for adolescents" target="_MP">Adolescents</a> |
+              <a href="https://www.google.com/search?q=what the EU does for school children" target="_MP">School children</a>
+              <br> <a href="https://www.google.com/search?q=what the EU does for small children" target="_MP">Small children</a> |
+              <a href="https://www.google.com/search?q=what the EU does for disabled" target="_MP">Disabled</a> |
+              <a href="https://www.google.com/search?q=what the EU does for homecare" target="_MP">Homecare</a>
+              <br>
+              <a href="https://www.google.com/search?q=what the EU does for chronic sick" target="_MP">Chronic sick</a> |
+              <a href="https://www.google.com/search?q=what the EU does for prisoners" target="_MP">Prisoners</a> |
+              <a href="https://www.google.com/search?q=what the EU does for wissel blower" target="_MP">Whissle Blower</a>
+              <br>
+              <a href="https://www.google.com/search?q=what the EU does for poor people" target="_MP">Poor people</a> |
+              <a href="https://www.google.com/search?q=what the EU does for homeless" target="_MP">Homeless</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hexagonbl" style="top:473px; left:38px;">
+      <table border="1" cellpadding="5" style="height: 100%; top:-48px; left:15px">
+        <tr>
+          <td colspan="2" align="center">
+            <br/>
+            <a data-baseurl="https://www.google.com/search?q=EU Commission Administration and payment" target="_MP">Administration</a> |
+            <a data-baseurl="https://www.google.com/search?q=EU argiculture and rural devlopment" target="_MP">Agriculture</a>
+            <br>
+            <a data-baseurl="https://www.google.com/search?q=Eu budget" target="_MP">Budget</a> |
+            <a data-baseurl="https://www.google.com/search?q=EU climate action" target="_MP">Climate action</a>
+            <br>
+            <a data-baseurl="https://www.google.com/search?q=Eu communication" target="_MP">Communication</a> |
+            <a data-baseurl="https://www.google.com/search?q=Eu Networks - Technology" target="_MP">Networks - Technology</a>
+            <br>
+            <a data-baseurl="https://www.google.com/search?q=EU competition" target="_MP">Competition</a> |
+            <a data-baseurl="https://www.google.com/search?q=EU consumers health agriculture and food executive agency" target="_MP">Consumers</a> | <a data-baseurl="https://www.google.com/search?q=EU Banking" target="_MP">Banking</a>
+            <br>
+            <a data-baseurl="https://www.google.com/search?q=EU dataprotection officer" target="_MP">Data Protection</a> | <a data-baseurl="https://www.google.com/search?q=EU Businesses" target="_MP">Companies</a>
+            <br>
+            <br>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <div class="c">
+              <font size="+2">
+             <strong>
+             <a data-baseurl="https://www.google.com/search?q=~ec.europa.eu/neighbourhood-enlargement/policy/conditions-membership/chapters-of-the-acquis_en" target="_MP">
+                 EU Commission<br>Chapters</a><br>
+            </strong>
+            </font>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <a data-baseurl="https://ec.europa.eu/search/?QueryText=" target="_MP">Search ec.europa.eu</a> |
+            <a data-baseurl="https://www.europarl.europa.eu/news/en/search?planet=_all&q=" target="_MP">Search europarl</a>
+            <br><a data-baseurl="https://europa.eu/search/?QueryText=" target="_MP">Search Documents EU</a> |
+            <a data-baseurl="https://europa.eu/search/?QueryText=Law" target="_MP">Law</a> |
+            <a data-baseurl="https://europa.eu/search/?QueryText=Policies" target="_MP">Policies</a>
+            <a data-baseurl="https://europa.eu/search/?QueryText=Funding Grants" target="_MP">Grants</a> |
+            <a data-baseurl="https://europa.eu/search/?QueryText=Renders Contracts" target="_MP">Tenders</a> |
+            <a data-baseurl="https://europa.eu/search/?QueryText=Finance" target="_MP">Finance</a>
+            <a data-baseurl="https://europa.eu/search/?QueryText=consultations" target="_MP">Consultations</a>
+            <a data-baseurl="https://europa.eu/search/?QueryText=economy" target="_MP">Economy</a> |
+            <a data-baseurl="https://europa.eu/search/?QueryText=Education" target="_MP">Education</a>
+            <a data-baseurl="https://europa.eu/search/?QueryText=Fraud" target="_MP">Fraud</a>
+            <br>
+            <a data-baseurl="https://ec.europa.eu/info/topics_en" target="_MP">View 38 Topics here</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- END Left column -->
+
+
+
+
+
+    <!-- BEGINNING Middle column -->
+    <div class="hexagongr" style="top:20px;  left:300px;">
+      <table border="1" cellpadding="5" style="height: 100%; top:-47px; left:20px">
+        <tbody>
+          <tr>
+            <td colspan="2" align="center">
+              <a data-baseurl="https://www.google.com/search?q=What is on the EU 
+                agenda" target="_MP">Agenda EU</a> |
+              <a data-baseurl="https://www.google.com/search?q=all european treaties" target="_MP">Treaties</a> |
+              <a data-baseurl="https://www.google.com/search?q=EUR-lex" target="_MP">EU Law</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=EU parlement" target="_MP">Parlement</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU commission" target="_MP">Commission</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU news" target="_MP">News</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=EU central Bank" target="_MP">Central Bank</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU Counsil OR Consilium" target="_MP">Counsil</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU press release" target="_MP">Press release</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=EU Curia" target="_MP">Court of justice</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU constiturion" target="_MP">Constitution</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU newsroom" target="_MP">Newsroom</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=EU Court of Audit" target="_MP">Court of Audit</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU Statistics" target="_MP">Statistics</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU finances" target="_MP">Finances</a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <div class="c">
+                <br/> <a data-baseurl="https://www.google.com/search?q=European Community" target="_MP"><font size="+2"><strong>European Community</strong>
+            </font></a>
+              </div>
+              <br/>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center"> <a data-baseurl="https://www.google.com/search?q=EU subsidies" target="_MP">Subsidies
+            </a> |
+              <a data-baseurl="https://www.google.com/search?q=EU find contact details address location phone email" target="_MP">People</a> |
+
+              <a data-baseurl="https://www.europarl.europa.eu/meps/en/indexsearch?query=" target="_MP">MEPs</a> |
+              <a data-baseurl="https://www.google.com/search?q=Wikipedia European Union" target="_MP">Wikipedia</a>
+              <br>
+              <a data-baseurl="https://www.europarl.europa.eu/meps/en/indexsearch?scope=ALL&term=9&query=" target="_MP">EU Parlement Info</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU guidelines" target="_MP">Guidelines</a>
+              <br><a data-baseurl="https://www.google.com/search?q=EU policies" target="_MP">Policy</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU procedures" target="_MP">Procedure</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU standards" target="_MP">Standard</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=EU statements" target="_MP">Statement</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU research" target="_MP">Research</a> |
+              <a data-baseurl="https://www.google.com/search?q=Future of EU" target="_MP">Future</a>
+              <br>
+              <a href="https://ec.europa.eu/commission/sites/beta-political/files/political-guidelines-next-commission_en.pdf" target="_MP">Ursula von der Leyen</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hexagonwt" style="top:322px; left:300px;">
+      <table border="1" cellpadding="5" style="height: 100%; top:-47px; left: 20px">
+        <!-- top is right because of the transition of the hexagon and left is top -->
+        <tbody>
+          <tr>
+            <td colspan="2" align="center">
+              <a data-baseurl="https://www.google.com/search?q=Agenda Volt Europe
+                " target="_MP">Agenda</a> |
+              <a data-baseurl="https://www.google.com/search?q=Wikipedia Volt Europe" target="_MP">Wikipedia</a> |
+              <a data-baseurl="https://www.europarl.europa.eu/meps/en/indexsearch?query=" target="_MP">MEP (MP)</a>
+              <br>
+              <a data-baseurl="https://www.europarl.europa.eu/meps/en/indexsearch?scope=ALL&term=9&query=" target="_MP">EU Parlement Info</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU guidelines" target="_MP">Guidelines</a>
+              <br><a data-baseurl="https://www.google.com/search?q=EU policies" target="_MP">Policy</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU procedures" target="_MP">Procedure</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU standards" target="_MP">Standard</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=EU statements" target="_MP">Statement</a> |
+              <a data-baseurl="https://www.google.com/search?q=EU research" target="_MP">Research</a> |
+              <a data-baseurl="https://www.google.com/search?q=Medical Classes Groups Types" target="_MP">Class-Type</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=+Volt in EU member states +" target="_MP">Volt in EU member states</a>
+              <br>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <a data-baseurl="https://google.com/search?q=Volt Europe" target="_MP">
+                <div class="c">
+                  <br>
+                  <font size="+2"><strong>Volt Europe<br/>Lead of Fairness</strong></font>
+                </div>
+              </a>
+              <br/>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2 " align="center ">
+
+              <a data-baseurl="https://www.google.com/search?q=Fairness review" target="_MP">Fairness</a> |
+              <a data-baseurl="https://www.google.com/search?q=Organization VoltEurope" target="_MP">Organization</a> |
+              <a data-baseurl="https://www.google.com/search?q=campains VoltEurope OR voltnederland" target="_MP">Campaigns</a> |
+              <a data-baseurl="https://www.google.com/search?q=foundations VoltEurope OR voltnederland" target="_MP">Foundations</a> |
+              <a data-baseurl="https://www.google.com/search?q=goals OR visions VoltEurope OR voltnederland" target="_MP">Goals</a> |
+              <a data-baseurl="https://www.google.com/search?q=plansVoltEurope OR voltnederland" target="_MP">Plans</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=volteurope OR voltnetherlands information about " target="_MP">Information for Citizens</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=volteurope +vision" target="_MP">Vision</a> |
+              <a data-baseurl="https://www.google.com/search?q=volteurope +amsterdam declaration" target="_MP">Amsterdam Declaration</a>
+              <br>
+              <a data-baseurl="https://www.google.com/search?q=how did volt europe start?" target="_MP">The birth of Volt</a> | <a href="https://www.google.com/search?q=Volt+undermines+democracy" target="_MP">Volt Critique</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hexagonbj " style="top:624px; left:300px; ">
+      <table border="1 " cellpadding="5 " style="height: 100%; top:-50px; left: 20px ">
+        <tbody>
+          <tr>
+            <td colspan="2 " align="center ">
+              <a href="https://www.google.com/search?q=best+political+system" target="_MP">Best Political Systems</a>
+              <br>
+              <a href="https://www.google.com/search?q=compare best voting systems New Zealand" target="_MP">Best Voting</a> -
+              <a href="https://www.google.com/search?q=compare best education system" target="_MP">Education System</a>
+              <br>
+              <a href="https://www.google.com/search?q=best preschool system" target="_MP">Best Preschool system</a> -
+              <a href="https://www.google.com/search?q=best EU education system" target="_MP">EU Education</a>
+              <br>
+              <a href="https://www.google.com/search?q=best child intervention systems compared with PCIT" target="_MP">Best Child Intervention</a> |
+              <a href="https://skillspanorama.cedefop.europa.eu/en/indicators/european-skills-index" target="_MP">EU Skills INDEX</a>
+              <br>
+              <a href="https://www.google.com/search?q=best music education in the EU" target="_MP">Best EU Music</a> -
+              <a href="https://www.google.com/search?q=best mathematics education in the EU" target="_MP">Math</a> -
+              <a href="https://www.google.com/search?q=best sports education in the EU" target="_MP">Sports</a>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <br>
+              <div class="c"><font size="+2"><strong> <a data-baseurl="https://www.google.com/search?q=ontologies codes" target="_MP">Politics &<br> Party Politics</a></strong></font></div>
+              <br> </td>
+          </tr>
+          <tr>
+            <td colspan="2" align="center">
+              <a href="https://www.google.com/search?q=best tax system" target="_MP">Best tax system</a> |
+              <a href="https://www.google.com/search?q=fair taxation where business is done OESO EU" target="_MP">Fair Taxation</a>
+              <br>
+              <a href="https://scholar.google.com/scholar?as_ylo=2015&q=everybody a basic income" target="_MP">Basic Income</a> |
+              <a href="https://www.google.com/search?q=inclusion of all" target="_MP">Inclusion for all</a>
+              <br>
+              <a href="https://www.google.com/search?q=best infrastructure for a political party" target="_MP">Start up politics</a> |
+              <a href="https://www.google.com/search?q=best+way+to+start+a+political+party" target="_MP">How to start?</a>
+              <br>
+              <a href="https://scholar.google.com/scholar?as_ylo=2015&q=everybody a basic income" target="_MP">Basic Income</a> |
+              <a href="https://www.google.com/search?q=modernisation of education EU" target="_MP">New Education?</a>
+              <br>
+              <a href="https://www.google.com/search?q=EU circular economy" target="_MP">Circular Economy</a> |
+              <a href="https://www.google.com/search?q=Fairness AND Sustainability EU" target="_MP">Sustainability</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- END Middle column -->
+
+
+
+    <!-- BEGINNING right column -->
+    <div class="hexagonrd" style="top:171px; left:562px;">
+      <table border="1" cellpadding="5" style="height: 100%; top:-40px; left:20px">
+        <tbody>
+          <tr>
+            <td colspan="2" align="center">
+              <a data-baseurl="https://google.com/search?q=voltnederland agenda" target="_MP">Agenda Volt Netherlands</a>
+              <br>
+              <a data-baseurl="https://google.com/search?q=voltnederland standpunten" target="_MP">Statements</a> |
+              <a data-baseurl="https://google.com/search?q=voltnederland standpunten" target="_MP">Policies</a>
+              <br>
+              <a data-baseurl="https://google.com/search?q=https://google.com/search?q=voltnederland Vision" target="_MP">Vision</a> |
+              <a data-baseurl="https://google.com/search?q=https://google.com/search?q=voltnederland declaration" target="_MP">Declarations</a> |
+              <a data-baseurl="https://google.com/search?q=https://google.com/search?q=voltnederland steden teams" target="_MP">Steden</a>
+              <br/>
+              <a data-baseurl="https://google.com/search?q=https://google.com/search?q=voltnederland fundraising" target="_MP">Fundraising</a> |
+              <a data-baseurl="https://google.com/search?q=https://google.com/search?q=voltnederland onze mensen contact" target="_MP">Contact</a> |
+              <a data-baseurl="https://google.com/search?q=https://google.com/search?q=voltnederland bestuur" target="_MP">Board</a> |
+              <a data-baseurl="https://google.com/search?q=https://google.com/search?q=voltnederland pers mediavragen" target="_MP">Press</a>
+              <br>
+              <a data-baseurl="https://google.com/search?q=https://google.com/search?q=voltnederland critique OR kritiek" target="_MP">Critique</a> |
+              <a data-baseurl="https://google.com/search?q=https://google.com/search?q=voltnederland on Radio" target="_MP">Radio</a> |
+              <a data-baseurl="https://google.com/search?q=https://google.com/search?q=voltnederland in krant en pers media" target="_MP">Volt in media</a>
+              <br>
+              <br>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2 " align="center ">
+              <div class="c "><font size="+2 "><strong><a data-baseurl="https://www.google.com/search?q=voltnederland" target="_MP">Volt  in the<br>Netherlands</a></strong>
+              </font></div>
+              <br/>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2 " align="center ">
+              <a data-baseurl="https://www.voltnederland.org/calendar?email_address=&address_change%5Bsubmitted_address%5D=" target="_MP">
+            Evenementen (Input your Postal Code)</a> |
+              <br>
+              <a href="https://google.com/search?q=VoltNederland Europa email" target="_MP">Join by Email</a> |
+              <a href="https://google.com/search?q=Volt Nederland become member" target="_MP">Become Member</a>
+              <br>
+              <a href="https://google.com/search?q=Facebook Volt Nederland" target="_MP">Facebook</a> |
+              <a data-baseurl="https://google.com/search?q=Volt Nederland Documents" target="_MP">Documents</a> |
+              <a data-baseurl="https://google.com/search?q=Volt Nederland People" target="_MP">Board</a>
+              <br>
+              <a data-baseurl="https://google.com/search?q=Volt Nederland people in the news" target="_MP">Subjects</a> |
+              <a data-baseurl="https://www.google.com/search?q=Volt Nederland Images" target="_MP">Images</a> |
+              <a data-baseurl="https://google.com/search?q=Volt Nederland" target="_MP">City Groups</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hexagongrn" style="top:473px; left:562px;">
+      <table border="1" cellpadding="5" style="height: 100%; top:-50px; left:20px">
+        <tbody>
+          <tr>
+            <td colspan="2" align="center">
+              <a href="https://google.com/search?q=scholar best governed countries?" target="_MP">Best Governed Countries</a>
+              <br>
+              <a href="https://google.com/search?q=scholar Best voting system" target="_MP">Best voting system</a> -
+              <a href="https://google.com/search?q=scholar Best healthcare system EU=" _MP">Health Care</a>
+          <br>
+          <a data-baseurl="https://google.com/search?q=scholar Best tax system " target="_MP">Best tax system</a> - 
+          <a data-baseurl="https://google.com/search?q=Best social system " target="_MP">Social system</a>
+          <br>
+          <a data-baseurl="https://google.com/search?q=Fighting poverty " target="_MP">Fighting poverty</a> -
+          <a data-baseurl="https://google.com/search?q=Fighting social exclusion " target="_MP">exclusion</a><br>
+          <a data-baseurl="https://google.com/search?q=Best population policy " target="_MP">Best population policy</a> | 
+          <a data-baseurl="https://google.com/search?q=rehabilitation " target="_MP">Rehabilitation</a><br>
+          <a data-baseurl="https://www.google.com/search?biw=2037&bih=992&tbm=isch&sxsrf=ACYBGNRNxH4vjkNBfuJPbUpqYnibPlxvIQ%3A1568360943257&source=hp&biw=&bih=&ei=70l7Xc-ODMvKwALTrr-IBA&q=EU " target="_MP">Images</a> | 
+          <a data-baseurl="https://www.google.com/search?q=EU++farmer&tbm=vid&sxsrf=ACYBGNS94y4gnwUgN5FaSJeSLKPrgndJlw:1571746970700&source=lnms&sa=X&ved=0ahUKEwjD3PXe7a_lAhVRsaQKHWNsCscQ_AUIDygC&biw=745&bih=843&dpr=1.88 " target="_MP">Video</a> |
+          <a data-baseurl="https://www.google.com/search?q=EU++school+teacher&tbm=nws&sxsrf=ACYBGNT3VoX_xa54ATtKZENSxzoq71jfGw:1571747338632&source=lnms&sa=X&ved=0ahUKEwj-w66O76_lAhXOyqQKHTI5C7UQ_AUIECgD&biw=820&bih=845&dpr=1.88 " target="_MP">News</a>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2 " align="center ">
+          <div class="c "> <font size="+2 "><strong>
+            <a data-baseurl="https://google.com/search?q=Volt country Members " target="_MP">Volt Country Members</a></strong></font></div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2 " align="center ">
+            <a data-baseurl="https://google.com/search?q=Volt Austria " target="_MP">Austria</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Belgium " target="_MP">Belgium</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Bulgaria " target="_MP">Bulgeria</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Croatia " target="_MP">Croatia</a>
+            <a data-baseurl="https://google.com/search?q=Volt Cyprus " target="_MP">Cyprus</a>  <br>
+            <a data-baseurl="https://google.com/search?q=Volt Czechia " target="_MP">Czechia</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Danmark " target="_MP">Danmark</a>
+            <a data-baseurl="https://google.com/search?q=Volt Estonia " target="_MP">Estonia</a>
+            <a data-baseurl="https://google.com/search?q=Volt Finland " target="_MP">Finland</a> <br>
+            <a data-baseurl="https://google.com/search?q=Volt Germany " target="_MP">Germany</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Greece " target="_MP">Greece</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Hungary " target="_MP">Hungary</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Ireland " target="_MP">Ireland</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Belgium " target="_MP">Italia</a> <br>
+            <a data-baseurl="https://google.com/search?q=Volt Latvia " target="_MP">Latvia</a>
+            <a data-baseurl="https://google.com/search?q=Volt Luxembourg " target="_MP">Luxembourg</a>
+            <a data-baseurl="https://google.com/search?q=Volt Malta " target="_MP">Malta</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Nederland " target="_MP">Nederland</a> <br>
+            <a data-baseurl="https://google.com/search?q=Volt Poland " target="_MP">Poland</a>
+            <a data-baseurl="https://google.com/search?q=Volt Portugal " target="_MP">Portugal</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Romenia " target="_MP">Romenia</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Slovakia " target="_MP">Slovakia</a> <br>
+            <a data-baseurl="https://google.com/search?q=Volt Slovenia " target="_MP">Slovenia</a>
+            <a data-baseurl="https://google.com/search?q=Volt Spain " target="_MP">Espana</a> 
+            <a data-baseurl="https://google.com/search?q=Volt Sweden " target="_MP">Sverige</a> 
+            <a data-baseurl="https://google.com/search?q=Volt UK " target="_MP">UK</a> 
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+  <!-- END Right column -->
+
+
+
+
+  <!-- zwarte navbar -->
+  <div class="navbar ">
+    <a href="mailto:hhlhendrickx@ampgmail.com?subject=The%20Universal%20Search%20Page%20for%20Medicine ">Drop a note! © Hans Hendrickx MD PhD 2019 Creator of MediPrepare & Universal Search Page for Medicine<br> with technical assistance by Winston Haaswijk MPhil PhD</a>
+  </div>
+
+  <!-- END zwarte navbar -->
+
+  <!-- Instructie -->
+  <div>
+    <div style="position:absolute; top:175px; left:35px; width:400px; font-size: 16px " z-index="-1 ">
+<p><strong>Instruction:</strong><br><br>1. Make the view of your browser smaller than the whole screen. 
+  This helps you find information with the least clicks. (Read 2 and 3 before submitting please)
+  <br><br>2. After you Type text and submit, f.e. 'healthcare' or 'landwirtschaft', click on Agenda at top, and you will see a new Tab containing the linked page.
+<br><br>3. Drag that Tab on top of the matrix, and slide it to the right of the matrix. 
+<br><br>4. Have fun clicking to information!  
+<br><br> <img src="agenda.png " width=100%> </p>
+    </div>
+  </div> 
+
+  <!-- END instructie -->
+
+</body>
+
+</html>
